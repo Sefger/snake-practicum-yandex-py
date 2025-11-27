@@ -1,18 +1,46 @@
+"""
+Игровая логика.
+"""
+
 
 def check_apple_collision(snake, apple):
-    if snake.get_head_position() == apple.position:
-        snake.length +=1
-        return True
-    return False
+    """
+    Проверяет столкновение змейки с яблоком.
 
-def reposition_apple(snake, apple):
+    Args:
+        snake: Объект змейки
+        apple: Объект яблока
+
+    Returns:
+        bool: True если было столкновение
+    """
+    return snake.get_head_position() == apple.position
+
+
+def reposition_apple(apple, snake):
+    """
+    Перемещает яблоко на новую позицию.
+
+    Args:
+        apple: Объект яблока
+        snake: Объект змейки
+    """
     apple.randomize_position()
     while apple.position in snake.positions:
         apple.randomize_position()
 
+
 def update_game_state(snake, apple):
+    """
+    Обновляет состояние игры.
+
+    Args:
+        snake: Объект змейки
+        apple: Объект яблока
+    """
     snake.update_direction()
     snake.move()
 
     if check_apple_collision(snake, apple):
-        reposition_apple(snake, apple)
+        snake.length += 1
+        reposition_apple(apple, snake)

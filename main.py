@@ -1,3 +1,6 @@
+"""
+Главный модуль игры Змейка.
+"""
 import pygame
 from constants import FPS
 from game_objects import Snake, Apple
@@ -5,12 +8,13 @@ from input_handler import handle_events
 from game_logic import update_game_state
 from renderer import Renderer
 
+
 def main():
+    """Запускает и управляет основным игровым циклом."""
     pygame.init()
     clock = pygame.time.Clock()
 
     renderer = Renderer()
-
     snake = Snake()
     apple = Apple()
 
@@ -20,11 +24,13 @@ def main():
         update_game_state(snake, apple)
 
         renderer.clear_screen()
-        renderer.draw_game_objects(snake,apple)
+        renderer.draw_game_objects(snake, apple)
         renderer.update_display()
 
         clock.tick(FPS)
+
     pygame.quit()
 
-if __name__=='__main__':
+
+if __name__ == "__main__":
     main()
