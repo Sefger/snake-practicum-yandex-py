@@ -3,8 +3,8 @@ import random
 from constants import *
 
 class GameObject:
-    def __init__(self, positions=((SCREEN_WIDTH//2), (SCREEN_HEIGHT//2)), body_color=WHITE):
-        self.positions = positions
+    def __init__(self, position=((SCREEN_WIDTH//2), (SCREEN_HEIGHT//2)), body_color=WHITE):
+        self.position = position
         self.body_color = body_color
 
     def draw (self, surface):
@@ -57,7 +57,7 @@ class Snake(GameObject):
     def move(self):
         head = self.get_head_position()
         x, y = self.direction
-        new_x = (head[0]+(x*GRID_SIZE)%SCREEN_WIDTH)
+        new_x = (head[0]+(x*GRID_SIZE))%SCREEN_WIDTH
         new_y = (head[1] + (y * GRID_SIZE))%SCREEN_HEIGHT
         new_position = (new_x, new_y)
 
@@ -73,18 +73,18 @@ class Snake(GameObject):
         if len(self.positions)>self.length:
             self.positions.pop()
 
-        def draw(self, surface):
-            if self.last:
-                last_rect = pygame.Rect(
-                    (self.last[0], self.last[1]),
-                    (GRID_SIZE, GRID_SIZE)
-                )
-                pygame.draw.rect(surface, BOARD_BACKGROUND_COLOR, last_rect)
+    def draw(self, surface):
+        if self.last:
+            last_rect = pygame.Rect(
+                (self.last[0], self.last[1]),
+                (GRID_SIZE, GRID_SIZE)
+            )
+            pygame.draw.rect(surface, BOARD_BACKGROUND_COLOR, last_rect)
 
-            for position in self.positions:
-                rect = pygame.Rect(
-                    (position[0], position[1]),
-                    (GRID_SIZE, GRID_SIZE)
-                )
-                pygame.draw.rect(surface, self.body_color, rect)
-                pygame.draw.rect(surface, WHITE, rect, 1)
+        for position in self.positions:
+            rect = pygame.Rect(
+                (position[0], position[1]),
+                (GRID_SIZE, GRID_SIZE)
+            )
+            pygame.draw.rect(surface, self.body_color, rect)
+            pygame.draw.rect(surface, WHITE, rect, 1)

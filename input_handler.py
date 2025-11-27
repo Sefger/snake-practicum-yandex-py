@@ -1,6 +1,6 @@
 import pygame
 from pygame.locals import *
-
+from constants import *
 
 def handle_events(snake):
     for event in pygame.event.get():

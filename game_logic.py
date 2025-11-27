@@ -1,4 +1,3 @@
-from constants import *
 
 def check_apple_collision(snake, apple):
     if snake.get_head_position() == apple.position:
